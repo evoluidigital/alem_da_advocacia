@@ -1,129 +1,246 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-    /* ==========================================
-       TELA DE CARREGAMENTO
-    ========================================== */
 
-    const loading = document.querySelector(".loading-screen");
+/* ==========================================
+TELA DE CARREGAMENTO
+========================================== */
 
-    if (loading) {
-        window.addEventListener("load", () => {
-            loading.style.opacity = "0";
 
-            setTimeout(() => {
-                loading.remove();
-            }, 500);
-        });
-    }
+const loading = document.querySelector(".loading-screen");
 
-    /* ==========================================
-       MENU MOBILE
-    ========================================== */
 
-    const menuButton = document.querySelector(".menu-mobile");
-    const menu = document.querySelector(".menu");
+if(loading){
 
-    if (menuButton && menu) {
-        menuButton.addEventListener("click", () => {
-            menu.classList.toggle("active");
-        });
-    }
 
-    /* ==========================================
-       FECHAR MENU AO CLICAR
-    ========================================== */
+setTimeout(()=>{
 
-    document.querySelectorAll(".menu a").forEach(link => {
-        link.addEventListener("click", () => {
-            if (menu) {
-                menu.classList.remove("active");
-            }
-        });
-    });
 
-    /* ==========================================
-       ANIMAÇÕES AO ROLAR
-    ========================================== */
+loading.style.opacity="0";
 
-    const elementos = document.querySelectorAll(
-        ".about-card, .benefit-item, .transformation-content, .highlight-box, .cta-content"
-    );
 
-    if ("IntersectionObserver" in window) {
+setTimeout(()=>{
 
-        const observer = new IntersectionObserver((entries) => {
 
-            entries.forEach(entry => {
+loading.style.display="none";
 
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                }
 
-            });
+},500);
 
-        }, {
-            threshold: 0.15
-        });
 
-        elementos.forEach(elemento => {
-            elemento.classList.add("hidden");
-            observer.observe(elemento);
-        });
+},800);
 
-    }
 
-    /* ==========================================
-       ROLAGEM SUAVE
-    ========================================== */
+}
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
 
-        link.addEventListener("click", function (e) {
 
-            const destino = document.querySelector(this.getAttribute("href"));
 
-            if (destino) {
 
-                e.preventDefault();
+/* ==========================================
+MENU MOBILE
+========================================== */
 
-                destino.scrollIntoView({
-                    behavior: "smooth"
-                });
 
-            }
+const menuButton = document.querySelector(".menu-mobile");
 
-        });
+const menu = document.querySelector(".menu");
 
-    });
 
-    /* ==========================================
-       HEADER
-    ========================================== */
 
-    const header = document.querySelector(".header");
+if(menuButton){
 
-    if (header) {
 
-        window.addEventListener("scroll", () => {
+menuButton.addEventListener("click",()=>{
 
-            if (window.scrollY > 50) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
 
-        });
+menu.classList.toggle("active");
 
-    }
 
-    /* ==========================================
-       ANO DO RODAPÉ
-    ========================================== */
+});
 
-    const ano = document.querySelector(".footer p");
 
-    if (ano) {
-        ano.innerHTML = `© ${new Date().getFullYear()} Além da Advocacia. Todos os direitos reservados.`;
-    }
+}
+
+
+
+
+
+/* ==========================================
+FECHAR MENU AO CLICAR NO LINK
+========================================== */
+
+
+const linksMenu = document.querySelectorAll(".menu a");
+
+
+
+linksMenu.forEach(link=>{
+
+
+link.addEventListener("click",()=>{
+
+
+if(menu){
+
+menu.classList.remove("active");
+
+}
+
+
+});
+
+
+});
+
+
+
+});
+ 
+/* ==========================================
+ANIMAÇÕES AO ROLAR A PÁGINA
+========================================== */
+
+
+const elementos = document.querySelectorAll(
+
+".about-card, .benefit-item, .transformation-content, .highlight-box, .cta-content"
+
+);
+
+
+
+const observer = new IntersectionObserver((entries)=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+
+entry.target.classList.add("show");
+
+
+}
+
+
+});
+
+
+},{
+
+threshold:0.15
+
+});
+
+
+
+
+elementos.forEach(elemento=>{
+
+
+elemento.classList.add("hidden");
+
+
+observer.observe(elemento);
+
+
+});
+
+
+
+
+
+/* ==========================================
+ROLAGEM SUAVE
+========================================== */
+
+
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+
+
+link.addEventListener("click",function(e){
+
+
+const destino=document.querySelector(this.getAttribute("href"));
+
+
+if(destino){
+
+
+e.preventDefault();
+
+
+destino.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+});
+
+
+});
+
+
+
+});
+ 
+/* ==========================================
+EFEITO DE SCROLL NO HEADER
+========================================== */
+
+
+const header = document.querySelector(".header");
+
+
+
+window.addEventListener("scroll",()=>{
+
+
+if(window.scrollY > 50){
+
+
+header.classList.add("scrolled");
+
+
+}else{
+
+
+header.classList.remove("scrolled");
+
+
+}
+
+
+});
+
+
+
+
+
+/* ==========================================
+ANO AUTOMÁTICO NO FOOTER
+========================================== */
+
+
+const ano = document.querySelector(".footer p");
+
+
+if(ano){
+
+
+ano.innerHTML = 
+
+`© ${new Date().getFullYear()} Além da Advocacia. Todos os direitos reservados.`;
+
+
+}
+
+
 
 });
