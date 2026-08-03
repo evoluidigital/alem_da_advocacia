@@ -1,243 +1,129 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
+    /* ==========================================
+       TELA DE CARREGAMENTO
+    ========================================== */
 
-/* ==========================================
-TELA DE CARREGAMENTO
-========================================== */
+    const loading = document.querySelector(".loading-screen");
 
+    if (loading) {
+        window.addEventListener("load", () => {
+            loading.style.opacity = "0";
 
-const loading = document.querySelector(".loading-screen");
+            setTimeout(() => {
+                loading.remove();
+            }, 500);
+        });
+    }
 
+    /* ==========================================
+       MENU MOBILE
+    ========================================== */
 
-if(loading){
+    const menuButton = document.querySelector(".menu-mobile");
+    const menu = document.querySelector(".menu");
 
+    if (menuButton && menu) {
+        menuButton.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+    }
 
-setTimeout(()=>{
+    /* ==========================================
+       FECHAR MENU AO CLICAR
+    ========================================== */
 
+    document.querySelectorAll(".menu a").forEach(link => {
+        link.addEventListener("click", () => {
+            if (menu) {
+                menu.classList.remove("active");
+            }
+        });
+    });
 
-loading.style.opacity="0";
+    /* ==========================================
+       ANIMAÇÕES AO ROLAR
+    ========================================== */
 
+    const elementos = document.querySelectorAll(
+        ".about-card, .benefit-item, .transformation-content, .highlight-box, .cta-content"
+    );
 
-setTimeout(()=>{
+    if ("IntersectionObserver" in window) {
 
+        const observer = new IntersectionObserver((entries) => {
 
-loading.style.display="none";
+            entries.forEach(entry => {
 
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
 
-},500);
+            });
 
+        }, {
+            threshold: 0.15
+        });
 
-},800);
+        elementos.forEach(elemento => {
+            elemento.classList.add("hidden");
+            observer.observe(elemento);
+        });
 
+    }
 
-}
+    /* ==========================================
+       ROLAGEM SUAVE
+    ========================================== */
 
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
 
+        link.addEventListener("click", function (e) {
 
+            const destino = document.querySelector(this.getAttribute("href"));
 
+            if (destino) {
 
-/* ==========================================
-MENU MOBILE
-========================================== */
+                e.preventDefault();
 
+                destino.scrollIntoView({
+                    behavior: "smooth"
+                });
 
-const menuButton = document.querySelector(".menu-mobile");
+            }
 
-const menu = document.querySelector(".menu");
+        });
 
+    });
 
+    /* ==========================================
+       HEADER
+    ========================================== */
 
-if(menuButton){
+    const header = document.querySelector(".header");
 
+    if (header) {
 
-menuButton.addEventListener("click",()=>{
+        window.addEventListener("scroll", () => {
 
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
 
-menu.classList.toggle("active");
+        });
 
+    }
 
-});
+    /* ==========================================
+       ANO DO RODAPÉ
+    ========================================== */
 
+    const ano = document.querySelector(".footer p");
 
-}
-
-
-
-
-
-/* ==========================================
-FECHAR MENU AO CLICAR NO LINK
-========================================== */
-
-
-const linksMenu = document.querySelectorAll(".menu a");
-
-
-
-linksMenu.forEach(link=>{
-
-
-link.addEventListener("click",()=>{
-
-
-if(menu){
-
-menu.classList.remove("active");
-
-}
-
-
-});
-
-
-});
-
-
-
- 
-/* ==========================================
-ANIMAÇÕES AO ROLAR A PÁGINA
-========================================== */
-
-
-const elementos = document.querySelectorAll(
-
-".about-card, .benefit-item, .transformation-content, .highlight-box, .cta-content"
-
-);
-
-
-
-const observer = new IntersectionObserver((entries)=>{
-
-
-entries.forEach(entry=>{
-
-
-if(entry.isIntersecting){
-
-
-entry.target.classList.add("show");
-
-
-}
-
-
-});
-
-
-},{
-
-threshold:0.15
-
-});
-
-
-
-
-elementos.forEach(elemento=>{
-
-
-elemento.classList.add("hidden");
-
-
-observer.observe(elemento);
-
-
-});
-
-
-
-
-
-/* ==========================================
-ROLAGEM SUAVE
-========================================== */
-
-
-document.querySelectorAll('a[href^="#"]').forEach(link=>{
-
-
-link.addEventListener("click",function(e){
-
-
-const destino=document.querySelector(this.getAttribute("href"));
-
-
-if(destino){
-
-
-e.preventDefault();
-
-
-destino.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-
-}
-
-
-});
-
-
-});
-
-
-
- 
-/* ==========================================
-EFEITO DE SCROLL NO HEADER
-========================================== */
-
-
-const header = document.querySelector(".header");
-
-
-
-window.addEventListener("scroll",()=>{
-
-
-if(window.scrollY > 50){
-
-
-header.classList.add("scrolled");
-
-
-}else{
-
-
-header.classList.remove("scrolled");
-
-
-}
-
-
-});
-
-
-
-
-
-/* ==========================================
-ANO AUTOMÁTICO NO FOOTER
-========================================== */
-
-
-const ano = document.querySelector(".footer p");
-
-
-if(ano){
-
-
-ano.innerHTML = 
-
-`© ${new Date().getFullYear()} Além da Advocacia. Todos os direitos reservados.`;
-
-
-}
-
+    if (ano) {
+        ano.innerHTML = `© ${new Date().getFullYear()} Além da Advocacia. Todos os direitos reservados.`;
+    }
 
 });
