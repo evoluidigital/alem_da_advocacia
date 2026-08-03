@@ -94,7 +94,6 @@ menu.classList.remove("active");
 
 
 
-});
  
 /* ==========================================
 ANIMAÇÕES AO ROLAR A PÁGINA
