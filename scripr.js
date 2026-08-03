@@ -187,7 +187,6 @@ behavior:"smooth"
 
 
 
-});
  
 /* ==========================================
 EFEITO DE SCROLL NO HEADER
